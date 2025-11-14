@@ -2,5 +2,6 @@
 
 Sistema de cadastro de clientes
 
-Curso: Python 793
+Curso: Python.793
+
 Aluno: Bruno Furtado Lima
