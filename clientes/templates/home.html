@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Sistema de Cadastro{% endblock %}</title>
+
+  <!-- Fonte (opcional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'clientes/css/style.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">SC</span>
+        <span class="brand-text">Sistema de Cadastro</span>
+      </a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="site-nav" class="site-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/cadastro/" class="nav-link">Cadastro</a>
+        <a href="/lista/" class="nav-link">Lista</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    {% block content %}
+    <!-- Conteúdo das páginas filhas -->
+    {% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {{ now.year }} Sistema de Cadastro — Desenvolvido por você</p>
+    </div>
+  </footer>
+
+  <script src="{% static 'clientes/js/main.js' %}"></script>
+</body>
+</html>

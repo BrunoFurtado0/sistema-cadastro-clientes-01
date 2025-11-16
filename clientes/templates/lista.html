@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Clientes - Sistema</title>
+  <link rel="stylesheet" href="{% static 'clientes/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">SC</span>
+        <span class="brand-text">Sistema de Cadastro</span>
+      </a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="site-nav" class="site-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/cadastro/" class="nav-link">Cadastro</a>
+        <a href="/lista/" class="nav-link">Lista</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <section class="lista-container">
+      <div class="lista-header">
+        <h1>Lista de Clientes</h1>
+        <a href="/cadastro/" class="btn primary">+ Novo Cliente</a>
+      </div>
+
+      {% if clientes %}
+        <div class="table-responsive">
+          <table class="tabela-clientes">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th class="acoes-col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for cliente in clientes %}
+              <tr>
+                <td data-label="ID">{{ cliente.id }}</td>
+                <td data-label="Nome">{{ cliente.nome }}</td>
+                <td data-label="Telefone">{{ cliente.telefone }}</td>
+                <td data-label="Ações" class="acoes">
+                  <a href="/editar/{{ cliente.id }}/" class="btn-sm btn-editar">Editar</a>
+
+<form method="post" action="/excluir/{{ cliente.id }}/" style="display:inline;">
+  {% csrf_token %}
+  <button type="submit" class="btn-sm btn-excluir" onclick="return confirm('Tem certeza que deseja excluir {{ cliente.nome }}?')">
+    Excluir
+  </button>
+</form>
+
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="texto-vazio">Nenhum cliente cadastrado ainda.</p>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {% now "Y" %} Sistema de Cadastro — Desenvolvido por você</p>
+    </div>
+  </footer>
+</body>
+</html>
